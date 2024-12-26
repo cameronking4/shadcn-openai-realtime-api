@@ -6,10 +6,9 @@ https://github.com/user-attachments/assets/ea9324af-5c18-48d2-b980-2b81baeea4c0
 
 ## Features
 - **Next.js Framework**: Built with Next.js for server-side rendering and API routes.
-- **Tailwind CSS**: Styled using Tailwind CSS.
+- **Modern UI**: Animated using Tailwind CSS & Framer Motion & shadcn/ui.
 - **Use-WebRTC Hook**: A hook to abstract the OpenAI WebRTC handling.
 - **Tool Calling**: 5 example functions to demonstrate client side tools along with Realtime API: `getCurrentTime`, `partyMode`, `changeBackground`, `launchWebsite`, `copyToClipboard`
-- **Shadcn/ui**: All components in ui folder are from shadcn/ui.
 - **Type Safety**: TypeScript with strict eslint rules (optional)
 
 ## Requirements
