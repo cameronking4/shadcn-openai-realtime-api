@@ -17,9 +17,28 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { Message as MessageType } from "@/types"
+import { ScrollArea } from "@/components/ui/scroll-area"
+import { Input } from "@/components/ui/input"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { useState } from "react"
 
 export function MessageControls({ conversation, msgs }: { conversation: Conversation[], msgs: MessageType[] }) {
+  // Move useState hooks to the top, before any conditional returns
+  const [typeFilter, setTypeFilter] = useState<string>("all")
+  const [searchQuery, setSearchQuery] = useState("")
+  
   if (conversation.length === 0) return null
+
+  // Get unique message types
+  const messageTypes = ["all", ...new Set(msgs.map(msg => msg.type))]
+
+  // Filter messages based on type and search query
+  const filteredMsgs = msgs.filter(msg => {
+    const matchesType = typeFilter === "all" || msg.type === typeFilter
+    const matchesSearch = searchQuery === "" || 
+      JSON.stringify(msg).toLowerCase().includes(searchQuery.toLowerCase())
+    return matchesType && matchesSearch
+  })
 
   return (
     <div className="space-y-2">
@@ -31,29 +50,51 @@ export function MessageControls({ conversation, msgs }: { conversation: Conversa
               View Logs
             </Button>
           </DialogTrigger>
-          <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">
+          <DialogContent className="max-w-full p-4 mx-auto overflow-y-auto">
             <DialogHeader>
               <DialogTitle>Conversation Logs</DialogTitle>
             </DialogHeader>
+            <div className="flex gap-4 mb-4">
+              <Select value={typeFilter} onValueChange={setTypeFilter}>
+                <SelectTrigger className="w-[200px]">
+                  <SelectValue placeholder="Filter by type" />
+                </SelectTrigger>
+                <SelectContent>
+                  {messageTypes.map(type => (
+                    <SelectItem key={type} value={type}>
+                      {type}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <Input
+                placeholder="Search messages..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="flex-1"
+              />
+            </div>
             <div className="mt-4">
-              <Table>
-              <TableHeader>
-                    <TableRow>
+              <ScrollArea className="h-[80vh]">
+              <Table className="max-w-full">
+                <TableHeader>
+                  <TableRow>
                     <TableHead>Type</TableHead>
                     <TableHead>Content</TableHead>
-                    </TableRow>
+                  </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {msgs.map((msg, i) => (
+                  {filteredMsgs.map((msg, i) => (
                     <TableRow key={i}>
-                        <TableCell className="font-medium">{msg.type}</TableCell>
-                        <TableCell className="font-mono text-sm">
+                      <TableCell className="font-medium">{msg.type}</TableCell>
+                      <TableCell className="font-mono text-sm whitespace-pre-wrap break-words max-w-full]">
                         {JSON.stringify(msg, null, 2)}
-                        </TableCell>
+                      </TableCell>
                     </TableRow>
-                    ))}
-                </TableBody>
-              </Table>
+                  ))}
+                  </TableBody>
+                </Table>
+              </ScrollArea>
             </div>
           </DialogContent>
         </Dialog>

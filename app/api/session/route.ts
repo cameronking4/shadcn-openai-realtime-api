@@ -22,7 +22,7 @@ export async function POST() {
         });
 
         if (!response.ok) {
-            throw new Error(`API request failed with status ${response.status}`);
+            throw new Error(`API request failed with status ${JSON.stringify(response)}`);
         }
 
         const data = await response.json();
