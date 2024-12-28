@@ -21,7 +21,7 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useState } from "react"
-import { DownloadCloud, Terminal } from "lucide-react"
+import { Terminal } from "lucide-react"
 
 function FilterControls({
   typeFilter,
