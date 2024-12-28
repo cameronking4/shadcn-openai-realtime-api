@@ -23,24 +23,26 @@ export function TokenUsageDisplay({ messages }: TokenUsageDisplayProps) {
                 {messages
                   .filter((msg) => msg.type === 'response.done')
                   .slice(-1)
-                  .map((msg) => (
-                    <Table key="token-usage-table">
-                      <TableBody>
-                        <TableRow>
-                          <TableCell className="font-medium">Total Tokens</TableCell>
-                          <TableCell>{msg.response?.usage?.total_tokens}</TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell className="font-medium">Input Tokens</TableCell>
-                          <TableCell>{msg.response?.usage?.input_tokens}</TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell className="font-medium">Output Tokens</TableCell>
-                          <TableCell>{msg.response?.usage?.output_tokens}</TableCell>
-                        </TableRow>
-                      </TableBody>
-                    </Table>
-                  ))}
+                  .map((msg) => {
+                    const tokenData = [
+                      { label: "Total Tokens", value: msg.response?.usage?.total_tokens },
+                      { label: "Input Tokens", value: msg.response?.usage?.input_tokens }, 
+                      { label: "Output Tokens", value: msg.response?.usage?.output_tokens }
+                    ];
+
+                    return (
+                      <Table key="token-usage-table">
+                        <TableBody>
+                          {tokenData.map(({label, value}) => (
+                            <TableRow key={label}>
+                              <TableCell className="font-medium motion-preset-focus-s">{label}</TableCell>
+                              <TableCell>{value}</TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    );
+                  })}
               </div>
             </CardContent>
           </Card>

@@ -4,9 +4,6 @@ import { useState, useRef, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { Conversation } from "@/lib/conversations";
 
-/**
- * Example "Tool" interface—adjust as you need.
- */
 export interface Tool {
   name: string;
   description: string;
@@ -150,7 +147,7 @@ export default function useWebRTCAudioSession(
   async function handleDataChannelMessage(event: MessageEvent) {
     try {
       const msg = JSON.parse(event.data);
-      console.log("Incoming dataChannel message:", msg);
+      // console.log("Incoming dataChannel message:", msg);
 
       switch (msg.type) {
         /**
@@ -200,7 +197,7 @@ export default function useWebRTCAudioSession(
          * Final user transcription
          */
         case "conversation.item.input_audio_transcription.completed": {
-          console.log("Final user transcription:", msg.transcript);
+          // console.log("Final user transcription:", msg.transcript);
           updateEphemeralUserMessage({
             text: msg.transcript || "",
             isFinal: true,
@@ -277,7 +274,7 @@ export default function useWebRTCAudioSession(
         }
 
         default: {
-          console.warn("Unhandled message type:", msg.type);
+          // console.warn("Unhandled message type:", msg.type);
           break;
         }
       }
@@ -399,7 +396,7 @@ export default function useWebRTCAudioSession(
       dataChannelRef.current = dataChannel;
 
       dataChannel.onopen = () => {
-        console.log("Data channel open");
+        // console.log("Data channel open");
         configureDataChannel(dataChannel);
       };
       dataChannel.onmessage = handleDataChannelMessage;

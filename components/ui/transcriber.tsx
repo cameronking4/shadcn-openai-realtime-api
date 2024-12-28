@@ -106,7 +106,7 @@ function ConversationItem({ message }: { message: Conversation }) {
          isUser
            ? "bg-primary text-background"
            : "bg-secondary dark:text-foreground"
-       } px-4 py-2 rounded-lg max-w-[70%]`}
+       } px-4 py-2 rounded-lg max-w-[70%] motion-preset-slide-up-right`}
      >
        {(isUser && msgStatus === "speaking") || msgStatus === "processing" ? (
          // Show wave animation for "speaking" status

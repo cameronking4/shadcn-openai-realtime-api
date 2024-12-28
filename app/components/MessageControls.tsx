@@ -21,9 +21,53 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useState } from "react"
+import { DownloadCloud, Terminal } from "lucide-react"
+
+function FilterControls({
+  typeFilter,
+  setTypeFilter,
+  searchQuery,
+  setSearchQuery,
+  messageTypes,
+  messages,
+}: {
+  typeFilter: string
+  setTypeFilter: (value: string) => void
+  searchQuery: string
+  setSearchQuery: (value: string) => void
+  messageTypes: string[]
+  messages: MessageType[]
+}) {
+
+  return (
+    <div className="flex gap-4 mb-4">
+      <Select value={typeFilter} onValueChange={setTypeFilter}>
+        <SelectTrigger className="w-[200px]">
+          <SelectValue placeholder="Filter by type" />
+        </SelectTrigger>
+        <SelectContent>
+          {messageTypes.map(type => (
+            <SelectItem key={type} value={type}>
+              {type}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+      <Input
+        placeholder="Search messages..."
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        className="flex-1"
+      />
+      <Button variant="outline" onClick={() => console.log(messages)}>
+        <Terminal />
+        Log to Console
+      </Button>
+    </div>
+  )
+}
 
 export function MessageControls({ conversation, msgs }: { conversation: Conversation[], msgs: MessageType[] }) {
-  // Move useState hooks to the top, before any conditional returns
   const [typeFilter, setTypeFilter] = useState<string>("all")
   const [searchQuery, setSearchQuery] = useState("")
   
@@ -54,26 +98,14 @@ export function MessageControls({ conversation, msgs }: { conversation: Conversa
             <DialogHeader>
               <DialogTitle>Conversation Logs</DialogTitle>
             </DialogHeader>
-            <div className="flex gap-4 mb-4">
-              <Select value={typeFilter} onValueChange={setTypeFilter}>
-                <SelectTrigger className="w-[200px]">
-                  <SelectValue placeholder="Filter by type" />
-                </SelectTrigger>
-                <SelectContent>
-                  {messageTypes.map(type => (
-                    <SelectItem key={type} value={type}>
-                      {type}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <Input
-                placeholder="Search messages..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="flex-1"
-              />
-            </div>
+            <FilterControls
+              typeFilter={typeFilter}
+              setTypeFilter={setTypeFilter}
+              searchQuery={searchQuery}
+              setSearchQuery={setSearchQuery}
+              messageTypes={messageTypes}
+              messages={filteredMsgs}
+            />
             <div className="mt-4">
               <ScrollArea className="h-[80vh]">
               <Table className="max-w-full">

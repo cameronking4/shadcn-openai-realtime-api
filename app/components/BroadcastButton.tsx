@@ -10,7 +10,7 @@ export function BroadcastButton({ isSessionActive, onClick }: BroadcastButtonPro
   return (
     <Button
       variant={isSessionActive ? "destructive" : "default"}
-      className="w-full py-6 text-lg font-medium flex items-center justify-center gap-2"
+      className="w-full py-6 text-lg font-medium flex items-center justify-center gap-2 motion-preset-shake"
       onClick={onClick}
     >
       {isSessionActive && (

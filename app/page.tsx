@@ -61,7 +61,7 @@ const App: React.FC = () => {
               onClick={handleStartStopClick}
             />
           </div>
-          {status && <TokenUsageDisplay messages={msgs} />}
+          {msgs.length > 4 && <TokenUsageDisplay messages={msgs} />}
           {status && (
             <motion.div 
               className="w-full flex flex-col gap-2"
