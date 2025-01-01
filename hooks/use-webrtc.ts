@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { Conversation } from "@/lib/conversations";
+import { useTranslations } from "@/lib/translations/translations-context";
 
 export interface Tool {
   name: string;
@@ -34,6 +35,7 @@ export default function useWebRTCAudioSession(
   voice: string,
   tools?: Tool[],
 ): UseWebRTCAudioSessionReturn {
+  const { t, locale } = useTranslations();
   // Connection/session states
   const [status, setStatus] = useState("");
   const [isSessionActive, setIsSessionActive] = useState(false);
@@ -79,6 +81,7 @@ export default function useWebRTCAudioSession(
    * Configure the data channel on open, sending a session update to the server.
    */
   function configureDataChannel(dataChannel: RTCDataChannel) {
+    // Send session update
     const sessionUpdate = {
       type: "session.update",
       session: {
@@ -90,6 +93,16 @@ export default function useWebRTCAudioSession(
       },
     };
     dataChannel.send(JSON.stringify(sessionUpdate));
+
+    // Send language preference message
+    const languageMessage = {
+      type: "conversation.item.create",
+      item: {
+        type: "text",
+        text: `Language of the user is ${locale}. Respond only in ${locale} ${t("language")} only even if the user speaks in other languages later in conversation. It is crucial you maintain conversation in ${locale} ${t("language")}.`,
+      },
+    };
+    dataChannel.send(JSON.stringify(languageMessage));
   }
 
   /**

@@ -22,6 +22,7 @@ import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useState } from "react"
 import { Terminal } from "lucide-react"
+import { useTranslations } from "@/lib/translations/translations-context"
 
 function FilterControls({
   typeFilter,
@@ -38,6 +39,7 @@ function FilterControls({
   messageTypes: string[]
   messages: MessageType[]
 }) {
+  const { t } = useTranslations();
 
   return (
     <div className="flex gap-4 mb-4">
@@ -61,13 +63,14 @@ function FilterControls({
       />
       <Button variant="outline" onClick={() => console.log(messages)}>
         <Terminal />
-        Log to Console
+        {t('messageControls.log')}
       </Button>
     </div>
   )
 }
 
 export function MessageControls({ conversation, msgs }: { conversation: Conversation[], msgs: MessageType[] }) {
+  const { t } = useTranslations();
   const [typeFilter, setTypeFilter] = useState<string>("all")
   const [searchQuery, setSearchQuery] = useState("")
   
@@ -87,16 +90,16 @@ export function MessageControls({ conversation, msgs }: { conversation: Conversa
   return (
     <div className="space-y-2">
       <div className="flex justify-between items-center">
-        <h3 className="text-sm font-medium">Conversation History</h3>
+        <h3 className="text-sm font-medium">{t('messageControls.logs')}</h3>
         <Dialog>
           <DialogTrigger asChild>
             <Button variant="outline" size="sm">
-              View Logs
+              {t('messageControls.view')}
             </Button>
           </DialogTrigger>
           <DialogContent className="max-w-full p-4 mx-auto overflow-y-auto">
             <DialogHeader>
-              <DialogTitle>Conversation Logs</DialogTitle>
+              <DialogTitle>{t('messageControls.logs')}</DialogTitle>
             </DialogHeader>
             <FilterControls
               typeFilter={typeFilter}
@@ -111,8 +114,8 @@ export function MessageControls({ conversation, msgs }: { conversation: Conversa
               <Table className="max-w-full">
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Type</TableHead>
-                    <TableHead>Content</TableHead>
+                    <TableHead>{t('messageControls.type')}</TableHead>
+                    <TableHead>{t('messageControls.content')}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>

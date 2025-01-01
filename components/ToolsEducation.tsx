@@ -1,3 +1,5 @@
+"use client"
+
 import {
   Accordion,
   AccordionContent,
@@ -10,36 +12,40 @@ import {
   TableCell,
   TableRow,
 } from "@/components/ui/table"
+import { useTranslations } from "@/lib/translations/translations-context"
 
-const AVAILABLE_TOOLS = [
-  {
-    name: "Copy Fn",
-    description: 'Say "Copy that to clipboard" to paste it somewhere.',
-  },
-  {
-    name: "Get Time",
-    description: 'Ask "Tell me what time is it?" to get current time.',
-  },
-  {
-    name: "Theme Switcher",
-    description: 'Say "Change background" or "Switch to dark mode" or "Switch to light mode".',
-  },
-  {
-    name: "Party Mode",
-    description: 'Say "Start party mode" for a fun color animation!',
-  },
-  {
-    name: "Launch Website",
-    description: '"Take me to [website]" to launch a site in a new tab.',
-  },
-] as const;
 
 export function ToolsEducation() {
+  const { t } = useTranslations();
+
+  const AVAILABLE_TOOLS = [
+    {
+      name: t('tools.availableTools.copyFn.name'),
+      description: t('tools.availableTools.copyFn.description'),
+    },
+    {
+      name: t('tools.availableTools.getTime.name'),
+      description: t('tools.availableTools.getTime.description'),
+    },
+    {
+      name: t('tools.availableTools.themeSwitcher.name'),
+      description: t('tools.availableTools.themeSwitcher.description'),
+    },
+    {
+      name: t('tools.availableTools.partyMode.name'),
+      description: t('tools.availableTools.partyMode.description'),
+    },
+    {
+      name: t('tools.availableTools.launchWebsite.name'),
+      description: t('tools.availableTools.launchWebsite.description'),
+    },
+  ] as const;
+
   return (
     <div className="w-full max-w-lg mt-4">
       <Accordion type="single" collapsible>
         <AccordionItem value="tools">
-          <AccordionTrigger>Available Tools</AccordionTrigger>
+          <AccordionTrigger>{t('tools.availableTools.title')}</AccordionTrigger>
           <AccordionContent>
             <Table>
               <TableBody>

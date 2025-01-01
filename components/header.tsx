@@ -6,10 +6,13 @@ import { ThemeSwitcher } from "@/components/theme-switcher";
 import { MobileNav } from "./mobile-nav";
 import { Badge } from "./ui/badge";
 import { siteConfig } from "@/config/site";
-import { TwitterIcon, StarIcon } from "lucide-react";
+import { TwitterIcon, StarIcon, XIcon } from "lucide-react";
 import { motion } from "framer-motion";
+import { LanguageSwitcher } from "@/components/language-switcher";
+import { useTranslations } from "@/lib/translations/translations-context";
 
 export function Header() {
+  const { t } = useTranslations()
   return (
     <motion.header
       initial={{ y: -20, opacity: 0 }}
@@ -17,7 +20,7 @@ export function Header() {
       transition={{ duration: 0.4 }}
       className="w-full sticky top-0 z-50 border-b bg-background"
     >
-      <div className="container mx-auto px-4 h-12 flex items-center justify-between">
+      <div className="container mx-auto px-4 h-12 flex items-center justify-between gap-2">
         <MobileNav />
         <motion.nav
           initial={{ opacity: 0 }}
@@ -30,7 +33,7 @@ export function Header() {
               className="text-lg font-medium tracking-tighter flex gap-1 items-center"
               whileHover={{ scale: 1.02 }}
             >
-              {siteConfig.name}
+              {t('header.logo')}
             </motion.h1>
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
@@ -38,7 +41,7 @@ export function Header() {
               transition={{ delay: 0.3 }}
             >
               <Badge variant="outline" className="text-normal">
-                Beta
+                {t('header.beta')}
               </Badge>
             </motion.div>
           </Link>
@@ -49,6 +52,7 @@ export function Header() {
           transition={{ delay: 0.1 }}
           className="flex gap-3 items-center justify-end ml-auto"
         >
+          <LanguageSwitcher />
           <Link
             href={siteConfig.links.github}
             target="_blank"
@@ -62,8 +66,8 @@ export function Header() {
                 className="flex gap-3 items-center max-md:h-9 max-md:w-9 max-md:px-0"
                 aria-label="Give a star on GitHub"
               >
-                <span className="hidden md:block">Give a star</span>{" "}
-                <StarIcon />
+                <span className="hidden md:block">{t('header.github')}</span>{" "}
+                <StarIcon className="motion-preset-spin motion-loop-twice"/>
               </Button>
             </motion.div>
           </Link>
@@ -80,7 +84,7 @@ export function Header() {
                 className="flex gap-3 items-center max-md:h-9 max-md:w-9 max-md:px-0"
                 aria-label="Follow on Twitter"
               >
-                <span className="hidden md:block">Follow on</span>{" "}
+                <span className="hidden md:block">{t('header.twitter')}</span>{" "}
                 <TwitterIcon />
               </Button>
             </motion.div>

@@ -3,45 +3,48 @@
 import { toast } from "sonner"
 import confetti from 'canvas-confetti'
 import { animate as framerAnimate } from "framer-motion"
-
+import { useTranslations } from "@/lib/translations/translations-context"
 
 export const timeFunction = () => {
+  const { t } = useTranslations();
   const now = new Date()
   return {
     success: true,
     time: now.toLocaleTimeString(),
     timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-    message: "Announce to user: The current time is " + now.toLocaleTimeString() + " in " + Intl.DateTimeFormat().resolvedOptions().timeZone + " timezone."
+    message: t('tools.time') + now.toLocaleTimeString() + " in " + Intl.DateTimeFormat().resolvedOptions().timeZone + " timezone."
   }
 }
 
 export const backgroundFunction = () => {
+  const { t } = useTranslations();
   try {
     const html = document.documentElement;
     const currentTheme = html.classList.contains('dark') ? 'dark' : 'light';
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    const newTheme = currentTheme === t('header.dark') ? t('header.light') : t('header.dark');
 
     html.classList.remove(currentTheme);
     html.classList.add(newTheme);
 
     toast(`Switched to ${newTheme} mode! 🌓`, {
-      description: `Theme changed to ${newTheme} mode`,
+      description: t('tools.switchTheme') + newTheme + ".",
     })
 
     return { 
       success: true, 
       theme: newTheme,
-      message: `Switched to ${newTheme} mode`
+      message: t('tools.switchTheme') + newTheme + "."
     };
   } catch (error) {
     return { 
       success: false, 
-      message: `Failed to switch theme: ${error}` 
+      message: t('tools.themeFailed') + ": " + error 
     };
   }
 }
 
 export const partyFunction = () => {
+  const { t } = useTranslations();
   try {
     const duration = 5 * 1000
     const colors = ["#a786ff", "#fd8bbc", "#eca184", "#f8deb1", "#3b82f6", "#14b8a6", "#f97316", "#10b981", "#facc15"]
@@ -123,44 +126,36 @@ export const partyFunction = () => {
     }
 
     animate()
-    toast.success("Party mode! 🎉", {
-      description: "Party mode activated!",
+    toast.success(t('tools.partyMode') + " 🎉", {
+      description: t('tools.partyModeActivated'),
     })
-    return { success: true, message: "Party mode activated! 🎉" }
+    return { success: true, message: t('tools.partyModeActivated') + " 🎉" }
   } catch (error) {
-    return { success: false, message: `Failed to trigger party mode: ${error}` }
+    return { success: false, message: t('tools.partyModeFailed') + ": " + error }
   }
 }
 
 export const launchWebsite = ({ url }: { url: string }) => {
+  const { t } = useTranslations();
   window.open(url, '_blank')
-  toast("Launched the site! 🌐", {
-    description: `Launched the site ${url}, tell the user it's been launched.`,
+  toast(t('tools.launchWebsite') + " 🌐", {
+    description: t('tools.launched') + url ,
   })
   return {
     success: true,
-    message: `Launched the site${url}, tell the user it's been launched.`
-  }
-}
-
-export const takeScreenshot = () => {
-  const screenshot = document.querySelector('main')
-  
-  return {
-    success: true,
-    screenshot,
-    message: "Screenshot taken. Ask the user to paste it somewhere."
+    message: t('tools.launchWebsiteSuccess') + url
   }
 }
 
 export const copyToClipboard = ({ text }: { text: string }) => {
+  const { t } = useTranslations();
   navigator.clipboard.writeText(text)
-  toast("Text copied to clipboard! 📋", {
-    description: `Text copied to clipboard. Ask the user to paste it somewhere.`,
+  toast(t('tools.clipboard') + " 📋", {
+    description: t('tools.clipboardDescription'),
   })
   return {
     success: true,
     text,
-    message: "Text copied to clipboard. Ask the user to paste it somewhere."
+    message: t('tools.clipboardSuccess')
   }
 }

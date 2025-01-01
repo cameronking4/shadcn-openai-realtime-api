@@ -13,8 +13,10 @@ import { MenuIcon } from "lucide-react";
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { Badge } from "./ui/badge";
+import { useTranslations } from "@/lib/translations/translations-context"
 
 export function MobileNav() {
+  const { t } = useTranslations();
   const [open, setOpen] = useState(false);
 
   return (
@@ -35,14 +37,14 @@ export function MobileNav() {
               >
                 {siteConfig.name}
                 <Badge variant="outline" className="text-normal">
-                  Beta
+                  {t('header.badge')}
                 </Badge>
               </Link>
             </DialogTitle>
           </DialogHeader>
           <h1 className="mt-6 text-xl font-bold">About</h1>
           <p className="mt-2 text-muted-foreground text-start text-lg">
-               This is a project that aims to demonstrate how to use OpenAI Realtime API with WebRTC in a modern Next 15 project. It has shadcn/ui components already installed and the WebRTC audio session hook already implemented. Clone the project and define your own tools.
+            {t('header.about')}
           </p>
         </DialogContent>
       </Dialog>

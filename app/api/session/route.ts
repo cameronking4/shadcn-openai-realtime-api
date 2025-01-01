@@ -16,7 +16,7 @@ export async function POST() {
                 model: "gpt-4o-realtime-preview-2024-12-17",
                 voice: "alloy",
                 modalities: ["audio", "text"],
-                instructions:"Start conversation with the user by saying 'Hello, how can I help you today?'",
+                instructions:"Start conversation with the user by saying 'Hello, how can I help you today?' Use the tools to help the user. Speak and respond in the language of the user.",
                 tool_choice: "auto",
             }),
         });
