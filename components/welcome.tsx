@@ -4,7 +4,7 @@ import { GithubIcon } from "lucide-react"
 import Link from "next/link"
 import { useTranslations } from "@/components/translations-context"
 
-export const Hero = () => {
+export const Welcome = () => {
   const { t } = useTranslations()
   
   return (
@@ -29,4 +29,4 @@ export const Hero = () => {
   )
 } 
 
-export default Hero;
+export default Welcome;

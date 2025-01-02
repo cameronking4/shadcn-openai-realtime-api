@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react"
 import useWebRTCAudioSession from "@/hooks/use-webrtc"
 import { tools } from "@/lib/tools"
-import { Hero } from "@/components/hero"
+import { Welcome } from "@/components/welcome"
 import { VoiceSelector } from "@/components/voice-select"
 import { BroadcastButton } from "@/components/broadcast-button"
 import { StatusDisplay } from "@/components/status"
@@ -53,7 +53,7 @@ const App: React.FC = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <Hero />
+        <Welcome />
         
         <motion.div 
           className="w-full max-w-md bg-card text-card-foreground rounded-xl border shadow-sm p-6 space-y-4"
