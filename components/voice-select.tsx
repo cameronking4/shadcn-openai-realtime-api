@@ -1,5 +1,5 @@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { useTranslations } from "@/lib/translations/translations-context"
+import { useTranslations } from "@/components/translations-context"
 import { Label } from "@/components/ui/label"
 
 interface VoiceSelectorProps {

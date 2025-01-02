@@ -5,6 +5,7 @@ export const fr = {
         start: "Démarrer la Diffusion"
     },
     header: {
+        title: "À propos",
         about: "Ce projet vise à démontrer comment utiliser l'API OpenAI Realtime avec WebRTC dans un projet Next 15 moderne. Il dispose déjà des composants shadcn/ui installés et du hook de session audio WebRTC implémenté. Clonez le projet et définissez vos propres outils.",
         banner: "🎉 Découvrez la nouvelle bibliothèque OpenAI Realtime Blocks UI pour Next.js !",
         bannerLink: "En savoir plus →",
@@ -100,5 +101,6 @@ export const fr = {
         sage: "Sage - Autoritaire et Calme",
         verse: "Verse - Dynamique et Expressive"
     },
-    language: "Français"
+    language: "Français",
+    languagePrompt: "Parlez et répondez uniquement en français. Il est crucial que vous mainteniez vos réponses en français. Si l'utilisateur parle dans d'autres langues, vous devriez toujours répondre en français. (French only)"
 }

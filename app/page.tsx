@@ -3,15 +3,15 @@
 import React, { useEffect, useState } from "react"
 import useWebRTCAudioSession from "@/hooks/use-webrtc"
 import { tools } from "@/lib/tools"
-import { Hero } from "@/components/Hero"
-import { VoiceSelector } from "@/components/VoiceSelector"
-import { BroadcastButton } from "@/components/BroadcastButton"
-import { StatusDisplay } from "@/components/StatusDisplay"
-import { TokenUsageDisplay } from "@/components/TokenUsageDisplay"
-import { MessageControls } from "@/components/MessageControls"
-import { ToolsEducation } from "@/components/ToolsEducation"
+import { Hero } from "@/components/hero"
+import { VoiceSelector } from "@/components/voice-select"
+import { BroadcastButton } from "@/components/broadcast-button"
+import { StatusDisplay } from "@/components/status"
+import { TokenUsageDisplay } from "@/components/token-usage"
+import { MessageControls } from "@/components/message-controls"
+import { ToolsEducation } from "@/components/tools-education"
 import { motion } from "framer-motion"
-import { timeFunction, backgroundFunction, partyFunction, launchWebsite, copyToClipboard } from "@/components/tools-functions"
+import { useToolsFunctions } from "@/hooks/use-tools"
 
 const App: React.FC = () => {
   // State for voice selection
@@ -27,14 +27,23 @@ const App: React.FC = () => {
     conversation
   } = useWebRTCAudioSession(voice, tools)
 
+  // Get all tools functions
+  const toolsFunctions = useToolsFunctions();
+
   useEffect(() => {
-    // Register all functions
-    registerFunction('getCurrentTime', timeFunction)
-    registerFunction('changeBackgroundColor', backgroundFunction)
-    registerFunction('partyMode', partyFunction)
-    registerFunction('launchWebsite', launchWebsite)
-    registerFunction('copyToClipboard', copyToClipboard)
-  }, [registerFunction])
+    // Register all functions by iterating over the object
+    Object.entries(toolsFunctions).forEach(([name, func]) => {
+      const functionNames: Record<string, string> = {
+        timeFunction: 'getCurrentTime',
+        backgroundFunction: 'changeBackgroundColor',
+        partyFunction: 'partyMode',
+        launchWebsite: 'launchWebsite', 
+        copyToClipboard: 'copyToClipboard'
+      };
+      
+      registerFunction(functionNames[name], func);
+    });
+  }, [registerFunction, toolsFunctions])
 
   return (
     <main className="h-full">

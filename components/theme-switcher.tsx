@@ -8,7 +8,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { SunIcon, MoonIcon } from "lucide-react";
-import { useTranslations } from "@/lib/translations/translations-context";
+import { useTranslations } from "@/components/translations-context";
 
 export function ThemeSwitcher() {
   const { t } = useTranslations()

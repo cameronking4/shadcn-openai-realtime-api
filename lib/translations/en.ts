@@ -5,6 +5,7 @@ export const en = {
         start: "Start Broadcasting"
     },
     header: {
+        title: "About",
         about: "This is a project that aims to demonstrate how to use OpenAI Realtime API with WebRTC in a modern Next 15 project. It has shadcn/ui components already installed and the WebRTC audio session hook already implemented. Clone the project and define your own tools.",
         banner: "🎉 Check out the new OpenAI Realtime Blocks UI Library for Next.js!",
         bannerLink: "Learn more →",
@@ -83,7 +84,8 @@ export const en = {
         partyMode: {
             description: "Failed to activate party mode",
             success: "Party mode activated",
-            toast: "Party mode!"
+            toast: "Party mode!",
+            failed: "Failed to activate party mode",
         },
         switchTheme: "Theme switched to ",
         themeFailed: "Failed to switch theme",
@@ -100,5 +102,6 @@ export const en = {
         sage: "Sage - Authoritative & Calm",
         verse: "Verse - Dynamic & Expressive"
     },
-    language: "English"
+    language: "English",
+    languagePrompt: "Speak and respond only in English. It is crucial that you maintain your responses in English. If the user speaks in other languages, you should still respond in English."
 }

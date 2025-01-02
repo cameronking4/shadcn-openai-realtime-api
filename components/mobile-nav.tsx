@@ -13,7 +13,7 @@ import { MenuIcon } from "lucide-react";
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { Badge } from "./ui/badge";
-import { useTranslations } from "@/lib/translations/translations-context"
+import { useTranslations } from "@/components/translations-context"
 
 export function MobileNav() {
   const { t } = useTranslations();
@@ -35,14 +35,14 @@ export function MobileNav() {
                 onClick={() => setOpen(false)}
                 className="flex items-center gap-3 text-2xl"
               >
-                {siteConfig.name}
+                  {siteConfig.name}
                 <Badge variant="outline" className="text-normal">
-                  {t('header.badge')}
+                  {t('header.beta')}
                 </Badge>
               </Link>
             </DialogTitle>
           </DialogHeader>
-          <h1 className="mt-6 text-xl font-bold">About</h1>
+          <h1 className="mt-6 text-xl font-bold">{t('header.title')}</h1>
           <p className="mt-2 text-muted-foreground text-start text-lg">
             {t('header.about')}
           </p>

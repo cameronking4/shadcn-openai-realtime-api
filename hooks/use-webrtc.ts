@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { Conversation } from "@/lib/conversations";
-import { useTranslations } from "@/lib/translations/translations-context";
+import { useTranslations } from "@/components/translations-context";
 
 export interface Tool {
   name: string;
@@ -94,12 +94,15 @@ export default function useWebRTCAudioSession(
     };
     dataChannel.send(JSON.stringify(sessionUpdate));
 
+    console.log("Session update sent:", sessionUpdate);
+    console.log("Setting locale: " + t("language") + " : " + locale);
+
     // Send language preference message
     const languageMessage = {
       type: "conversation.item.create",
       item: {
         type: "text",
-        text: `Language of the user is ${locale}. Respond only in ${locale} ${t("language")} only even if the user speaks in other languages later in conversation. It is crucial you maintain conversation in ${locale} ${t("language")}.`,
+        text: t("languagePrompt"),
       },
     };
     dataChannel.send(JSON.stringify(languageMessage));

@@ -2,7 +2,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { GithubIcon } from "lucide-react"
 import Link from "next/link"
-import { useTranslations } from "@/lib/translations/translations-context"
+import { useTranslations } from "@/components/translations-context"
 
 export function Hero() {
   const { t } = useTranslations()

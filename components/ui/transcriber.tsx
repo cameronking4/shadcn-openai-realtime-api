@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import ThreeDotsWave from "@/components/ui/three-dots-wave";
 import { Conversation } from "@/lib/conversations";
-import { useTranslations } from "@/lib/translations/translations-context";
+import { useTranslations } from "@/components/translations-context";
 
 /**
 * Avatar building blocks with Radix

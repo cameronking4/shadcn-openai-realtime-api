@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 import { toast } from 'sonner'
-import { useTranslations } from "@/lib/translations/translations-context"
+import { useTranslations } from "@/components/translations-context"
 
 interface StatusDisplayProps {
   status: string
@@ -29,6 +29,6 @@ export function StatusDisplay({ status }: StatusDisplayProps) {
         duration: 3000,
       })
     }
-  }, [status])
+  }, [status, t])
     return null
 } 

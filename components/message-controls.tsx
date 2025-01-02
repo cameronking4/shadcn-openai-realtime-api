@@ -22,7 +22,7 @@ import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useState } from "react"
 import { Terminal } from "lucide-react"
-import { useTranslations } from "@/lib/translations/translations-context"
+import { useTranslations } from "@/components/translations-context"
 
 function FilterControls({
   typeFilter,
@@ -56,7 +56,7 @@ function FilterControls({
         </SelectContent>
       </Select>
       <Input
-        placeholder="Search messages..."
+        placeholder={t('messageControls.search')}
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
         className="flex-1"

@@ -1,13 +1,15 @@
 "use client"
 
 import { createContext, useContext, useState, ReactNode } from 'react'
-import { en } from './en'
-import { es } from './es'
-import { fr } from './fr'
-import { zh } from './zh'
+import { en } from '@/lib/translations/en'
+import { es } from '@/lib/translations/es'
+import { fr } from '@/lib/translations/fr'
+import { zh } from '@/lib/translations/zh'
+
+type TranslationValue = string | { [key: string]: TranslationValue }
 
 type Translations = {
-  [key: string]: any
+  [key: string]: TranslationValue
 }
 
 const translations: { [key: string]: Translations } = {
@@ -30,14 +32,14 @@ export function TranslationsProvider({ children }: { children: ReactNode }) {
 
   const t = (key: string): string => {
     const keys = key.split('.')
-    let value: any = translations[locale]
+    let value: TranslationValue = translations[locale]
     
     for (const k of keys) {
       if (value === undefined) return key
-      value = value[k]
+      value = typeof value === 'object' ? value[k] : key
     }
 
-    return value || key
+    return typeof value === 'string' ? value : key
   }
 
   return (

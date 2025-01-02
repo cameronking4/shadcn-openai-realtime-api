@@ -7,7 +7,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { siteConfig } from "@/config/site";
 import { Toaster } from "@/components/ui/sonner"
 import { Analytics } from "@vercel/analytics/react"
-import { TranslationsProvider } from "@/lib/translations/translations-context"
+import { TranslationsProvider } from "@/components/translations-context"
 import { Banner } from "@/components/banner";
 
 const geistSans = Geist({

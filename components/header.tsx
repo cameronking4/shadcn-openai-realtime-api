@@ -6,10 +6,10 @@ import { ThemeSwitcher } from "@/components/theme-switcher";
 import { MobileNav } from "./mobile-nav";
 import { Badge } from "./ui/badge";
 import { siteConfig } from "@/config/site";
-import { TwitterIcon, StarIcon, XIcon } from "lucide-react";
+import { TwitterIcon, StarIcon } from "lucide-react";
 import { motion } from "framer-motion";
 import { LanguageSwitcher } from "@/components/language-switcher";
-import { useTranslations } from "@/lib/translations/translations-context";
+import { useTranslations } from "@/components/translations-context";
 
 export function Header() {
   const { t } = useTranslations()

@@ -1,6 +1,6 @@
 "use client"
 
-import { useTranslations } from "@/lib/translations/translations-context"
+import { useTranslations } from "@/components/translations-context"
 
 export const Banner = () => {
   const { t } = useTranslations();
