@@ -4,12 +4,13 @@ This is a WebRTC-based Voice AI stream application using `OpenAI`'s `Realtime AP
 https://github.com/user-attachments/assets/ea9324af-5c18-48d2-b980-2b81baeea4c0
 
 ## Features
-![openai-realtime-api-nextjs-shadcn](https://github.com/user-attachments/assets/eb08e503-66a2-402a-a099-27d6e6d88110)
 - **Next.js Framework**: Built with Next.js for server-side rendering and API routes.
 - **Modern UI**: Animated using Tailwind CSS & Framer Motion & shadcn/ui.
 - **Use-WebRTC Hook**: A hook to abstract the OpenAI WebRTC handling.
 - **Tool Calling**: 5 example functions to demonstrate client side tools along with Realtime API: `getCurrentTime`, `partyMode`, `changeBackground`, `launchWebsite`, `copyToClipboard`
+- **Localization**: Select language for app strings and the voice agent (English, Spanish, French, Chinese)
 - **Type Safety**: TypeScript with strict eslint rules (optional)
+
   
 ## Requirements
 - **Deno runtime** or **Node.js**
